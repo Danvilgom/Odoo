@@ -1,0 +1,39 @@
+<openerp>
+  <data>
+
+
+ <record model="ir.ui.view" id="cine.seat_form_view">
+            <field name="name">seat.form</field>
+            <field name="model">cine.seat</field>
+            <field name="arch" type="xml">
+              <form string="Butaca Form">
+                <sheet>
+                  <notebook>
+                    <page string="Data">
+                      <group string="Main Data">
+                       <field name="name"/> 
+                        <field name="row"/>
+                        <field name="seat"/>
+                        <field name="theater"/>
+
+                      </group>
+                    </page>
+                    </notebook>
+                  </sheet>
+                </form>
+              </field>
+            </record>
+ <record model="ir.ui.view" id="cine.seat_tree_view">
+            <field name="name">seat.tree</field>
+            <field name="model">cine.seat</field>
+            <field name="arch" type="xml">
+              <tree>
+                        <field name="name"/>
+                        <field name="row"/>
+                        <field name="seat"/>
+                        <field name="theater"/>
+                </tree>
+              </field>
+            </record>
+  </data>
+</openerp>

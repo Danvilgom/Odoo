@@ -79,7 +79,7 @@
 
 
     <!-- Top menu item -->
-    <menuitem name="tots" id="tots.menu_root"/>
+    <menuitem name="Tots" id="tots.menu_root"/>
     <!-- menu categories -->
     <menuitem name="Networks" id="tots.menu_1" parent="tots.menu_root"/>
     <!-- actions -->

@@ -1,0 +1,38 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="taller.taller_tree">
+      <field name="name">taller list</field>
+      <field name="model">taller.taller</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="logo" widget="image"/>
+          <field name="adress"/>
+          <field name="phone"/>
+          <field name="schedule"/>
+          <field name="worker"/>
+          <field name="director"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="taller.taller_form">
+      <field name="name">taller list</field>
+      <field name="model">taller.taller</field>
+      <field name="arch" type="xml">
+        <form><sheet><group>
+          <field name="name"/>
+          <field name="logo" widget="image"/>
+          <field name="adress"/>
+          <field name="phone"/>
+          <field name="schedule"/>
+          <field name="worker"/>
+          <field name="director"/>
+        </group></sheet></form>
+      </field>
+    </record>
+
+  </data>
+</odoo>

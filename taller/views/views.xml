@@ -1,0 +1,25 @@
+<odoo>
+  <data>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="taller.action_window">
+      <field name="name">Garage</field>
+      <field name="res_model">taller.taller</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="Garage" id="taller.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Management" id="taller.menu_1" parent="taller.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Garage" id="taller.menu_1_list" parent="taller.menu_1" action="taller.action_window"/>
+
+  </data>
+</odoo>
