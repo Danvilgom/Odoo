@@ -3,10 +3,30 @@
 
     <!-- actions opening views on models -->
 
-    <record model="ir.actions.act_window" id="taller.action_window">
+    <record model="ir.actions.act_window" id="taller.taller_action_window">
       <field name="name">Garage</field>
       <field name="res_model">taller.taller</field>
       <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="taller.section_action_window">
+      <field name="name">Section</field>
+      <field name="res_model">taller.section</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="taller.reparation_action_window">
+      <field name="name">Reparation</field>
+      <field name="res_model">taller.reparation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="taller.work_action_window">
+      <field name="name">Work</field>
+      <field name="res_model">taller.work</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="taller.booking_action_window">
+      <field name="name">Booking</field>
+      <field name="res_model">taller.booking</field>
+      <field name="view_mode">tree,form,calendar</field>
     </record>
 
     <!-- Top menu item -->
@@ -19,7 +39,11 @@
 
     <!-- actions -->
 
-    <menuitem name="Garage" id="taller.menu_1_list" parent="taller.menu_1" action="taller.action_window"/>
+    <menuitem name="Garage" id="taller.menu_1_list" parent="taller.menu_1" action="taller.taller_action_window"/>
+    <menuitem name="Section" id="taller.menu_2_list" parent="taller.menu_1" action="taller.section_action_window"/>
+    <menuitem name="Reparation" id="taller.menu_3_list" parent="taller.menu_1" action="taller.reparation_action_window"/>
+    <menuitem name="Work" id="taller.menu_4_list" parent="taller.menu_1" action="taller.work_action_window"/>
+    <menuitem name="Booking" id="taller.menu_5_list" parent="taller.menu_1" action="taller.booking_action_window"/>
 
   </data>
 </odoo>

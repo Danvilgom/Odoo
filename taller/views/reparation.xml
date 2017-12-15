@@ -1,0 +1,40 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="taller.reparation_tree">
+      <field name="name">reparation tree</field>
+      <field name="model">taller.reparation</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="section"/>
+          <field name="price"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="taller.reparation_form">
+      <field name="name">reparation form</field>
+      <field name="model">taller.reparation</field>
+      <field name="arch" type="xml">
+        <form><sheet><group>
+          <field name="name"/>
+          <field name="section"/>
+          <field name="price"/>
+        </group></sheet></form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="taller.reparation_search">
+      <field name="name">reparation search</field>
+      <field name="model">taller.reparation</field>
+      <field name="arch" type="xml">
+        <search>
+          <filter name="group_by_section" string="Group by section" context="{'group_by': 'section'}"/>
+        </search>
+      </field>
+    </record>
+
+  </data>
+</odoo>

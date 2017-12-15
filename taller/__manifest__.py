@@ -28,6 +28,9 @@
         'views/views.xml',
         'views/templates.xml',
         'views/taller.xml',
+        'views/reparation.xml',
+        'views/work.xml',
+        'views/booking.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
