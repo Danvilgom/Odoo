@@ -25,7 +25,7 @@
       <field name="name">work form</field>
       <field name="model">taller.work</field>
       <field name="arch" type="xml">
-        <form><sheet><group attrs="{'invisible': [('status', '=', 'finalized')]}">
+        <form><sheet><group>
           <field name="name"/>
           <field name="workers"/>
           <field name="reparation"/>
@@ -50,6 +50,7 @@
           <filter name="group_by_status" string="Group by status" context="{'group_by': 'status'}"/>
           <filter name="group_by_type" string="Group by type" context="{'group_by': 'type'}"/>
           <filter name="Finalized" string="Finalized works" domain="[('status', '=', 'finalized')]"/>
+          <filter name="NotFinalized" string="Not finalized works" domain="[('status', '!=', 'finalized')]"/>
           <filter name="Progressing" string="Works in progress" domain="[('status', '=', 'processing')]"/>
           <filter name="Booking" string="Works booked" domain="[('status', '=', 'booking')]"/>
           <filter name="Garage" string="Garage location" domain="[('type', '=', 'garage')]"/>
