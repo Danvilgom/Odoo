@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from openerp.exceptions import ValidationError
 
 class taller(models.Model):
     _name = 'taller.taller'
@@ -12,6 +13,18 @@ class taller(models.Model):
     schedule = fields.Char()
     worker = fields.Many2many('res.partner')
     director = fields.Many2one('res.partner')
+
+    @api.constrains('worker')
+    def _check_something(self):
+        for t in self:
+            print t
+            print self.search([('id','!=',t.id)])
+            for t2 in self.search([('id','!=',t.id)]):
+                for w in t.worker:
+                    for value in variable:
+                        if w.id == t2.worker:
+                            raise ValidationError("Este trabajador ya está en otro taller: %s" % t.worker)
+                        # all records passed the test, don't return anything
 
 class section(models.Model):
     _name = 'taller.section'
