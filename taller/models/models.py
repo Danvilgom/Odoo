@@ -16,15 +16,12 @@ class taller(models.Model):
 
     @api.constrains('worker')
     def _check_something(self):
-        for t in self:
-            print t
-            print self.search([('id','!=',t.id)])
-            for t2 in self.search([('id','!=',t.id)]):
-                for w in t.worker:
-                    for value in variable:
-                        if w.id == t2.worker:
-                            raise ValidationError("Este trabajador ya está en otro taller: %s" % t.worker)
-                        # all records passed the test, don't return anything
+        for w in self.worker:
+            for t in self.search([('id','!=',self.id)]):
+                for w2 in t.worker:
+                    if w.id == w2.id:
+                        raise ValidationError("Trabajador duplicado.")
+
 
 class section(models.Model):
     _name = 'taller.section'
