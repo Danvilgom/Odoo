@@ -22,7 +22,6 @@ class taller(models.Model):
                     if w.id == w2.id:
                         raise ValidationError("Trabajador duplicado.")
 
-
 class section(models.Model):
     _name = 'taller.section'
 
@@ -53,6 +52,15 @@ class work(models.Model):
     ], default='booking')
     total_time = fields.Char()
     start_time = fields.Datetime()
+
+    # Campo computed por terminar
+    @api.depends('seats', 'attendee_ids')
+    def _taken_seats(self):
+      for r in self:
+          if not r.seats:
+              r.taken_seats = 0.0
+          else:
+              r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
 
 class booking(models.Model):
     _name = 'taller.booking'
