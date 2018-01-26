@@ -50,17 +50,16 @@ class work(models.Model):
         ('processing','Processing'),
         ('finalized','Finalized')
     ], default='booking')
-    total_time = fields.Char()
+    total_time = fields.Float()
     start_time = fields.Datetime()
+    total = fields.Float(compute='_compute_total')
 
-    # Campo computed por terminar
-    @api.depends('seats', 'attendee_ids')
-    def _taken_seats(self):
-      for r in self:
-          if not r.seats:
-              r.taken_seats = 0.0
-          else:
-              r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
+    # Campo compute por terminar
+    @api.depends('reparation')
+    def _compute_total(self):
+        for r in self:
+            preu = r.reparation.price
+            r.total = (preu + (preu * r.total_time / 10)) + r.overrun
 
 class booking(models.Model):
     _name = 'taller.booking'

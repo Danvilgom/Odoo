@@ -17,6 +17,7 @@
           <field name="status"/>
           <field name="total_time"/>
           <field name="start_time"/>
+          <field name="total"/>
         </tree>
       </field>
     </record>
@@ -36,6 +37,7 @@
           <field name="status"/>
           <field name="total_time"/>
           <field name="start_time"/>
+          <field name="total"/>
         </group></sheet></form>
       </field>
     </record>
