@@ -2,36 +2,64 @@
   <data>
     <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="taller.reparation_tree">
+    <record model="ir.ui.view" id="product.template_tree">
       <field name="name">reparation tree</field>
-      <field name="model">taller.reparation</field>
+      <field name="model">product.template</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
           <field name="section"/>
           <field name="price"/>
+          <field name="isReparation" invisible="1"/>
+          <!--<field name="inherit_id" ref="product.product_template_only_form_view"/>-->
         </tree>
       </field>
     </record>
 
-    <record model="ir.ui.view" id="taller.reparation_form">
+    <record model="ir.ui.view" id="product.template_form">
       <field name="name">reparation form</field>
-      <field name="model">taller.reparation</field>
+      <field name="model">product.template</field>
       <field name="arch" type="xml">
         <form><sheet><group>
           <field name="name"/>
           <field name="section"/>
           <field name="price"/>
+          <field name="isReparation" invisible="1"/>
+          <!--<field name="inherit_id" ref="product.product_template_only_form_view"/>-->
         </group></sheet></form>
       </field>
     </record>
 
-    <record model="ir.ui.view" id="taller.reparation_search">
+    <record model="ir.ui.view" id="product.template_search">
       <field name="name">reparation search</field>
-      <field name="model">taller.reparation</field>
+      <field name="model">product.template</field>
       <field name="arch" type="xml">
         <search>
           <filter name="group_by_section" string="Group by section" context="{'group_by': 'section'}"/>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="taller.reparation_tree">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="product.template_tree"/>
+        <field name="act_window_id" ref="product.template_action_window"/>
+    </record>
+    <record model="ir.actions.act_window.view" id="taller.reparation_view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="product.template_form"/>
+        <field name="act_window_id" ref="product.template_action_window"/>
+    </record>
+
+    <record model="ir.ui.view" id="taller.reparation_search_view">
+      <field name="name">Reparation search</field>
+      <field name="model">product.template</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="isReparation"/>
+          <filter name="next" String="reparation" domain="[('isReparation','=',True)]"/>
         </search>
       </field>
     </record>

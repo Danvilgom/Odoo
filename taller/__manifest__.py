@@ -19,8 +19,8 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
+    'depends': ['base','product'],
     # any module necessary for this one to work correctly
-    'depends': ['base'],
 
     # always loaded
     'data': [

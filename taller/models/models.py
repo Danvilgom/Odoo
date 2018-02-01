@@ -26,21 +26,24 @@ class section(models.Model):
     _name = 'taller.section'
 
     name = fields.Char()
-    reparation = fields.One2many('taller.reparation','section')
+    reparation = fields.One2many('product.template','section')
 
 class reparation(models.Model):
-    _name = 'taller.reparation'
+    _name = 'product.template'
+    _inherit = 'product.template'
 
     name = fields.Char()
     section = fields.Many2one('taller.section')
     price = fields.Float()
+    isReparation = fields.Boolean(default=False)
 
 class work(models.Model):
     _name = 'taller.work'
+    _inherit = 'product.template'
 
     name = fields.Char()
     workers = fields.Many2many('res.partner')
-    reparation = fields.Many2one('taller.reparation')
+    reparation = fields.Many2one('product.template')
     type = fields.Selection([('garage','Garage'),('home','Home')])
     garage_location = fields.Many2one('taller.taller')
     home_location = fields.Char()
@@ -67,7 +70,7 @@ class booking(models.Model):
     name = fields.Char()
     customer = fields.Many2one('res.partner')
     date = fields.Datetime()
-    reparation = fields.Many2many('taller.reparation')
+    reparation = fields.Many2many('product.template')
     taller_aux = fields.Many2one('taller.taller');
     status = fields.Selection([
         ('booking','Booking'),
