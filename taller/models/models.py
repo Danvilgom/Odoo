@@ -35,7 +35,7 @@ class reparation(models.Model):
     name = fields.Char()
     section = fields.Many2one('taller.section')
     price = fields.Float()
-    isReparation = fields.Boolean(default=False)
+    isReparation = fields.Boolean()
 
 class work(models.Model):
     _name = 'taller.work'
