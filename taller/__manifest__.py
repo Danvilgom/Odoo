@@ -19,7 +19,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base','product'],
+    'depends': ['base','product','sale'],
     # any module necessary for this one to work correctly
 
     # always loaded
@@ -30,7 +30,7 @@
         'views/taller.xml',
         'views/reparation.xml',
         'views/work.xml',
-        'views/booking.xml',
+        # 'views/booking.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

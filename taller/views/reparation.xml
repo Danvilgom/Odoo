@@ -16,6 +16,21 @@
       </field>
     </record>
 
+<!-- Vista -->
+
+    <record model="ir.ui.view" id="taller.template_form">
+      <field name="name">reparation form</field>
+      <field name="model">product.template</field>
+      <field name="arch" type="xml">
+        <form><sheet><group>
+          <field name="name"/>
+          <field name="section"/>
+          <field name="list_price"/>
+          <field name="isReparation"/>
+        </group></sheet></form>
+      </field>
+    </record>
+
 <!-- Herència en la vista -->
 
     <record model="ir.ui.view" id="product.template_form">
@@ -55,7 +70,7 @@
     <record model="ir.actions.act_window.view" id="taller.reparation_view">
         <field eval="2" name="sequence"/>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="product.template_form"/>
+        <field name="view_id" ref="taller.template_form"/>
         <field name="act_window_id" ref="product.template_action_window"/>
     </record>
 

@@ -4,49 +4,52 @@
 
     <record model="ir.ui.view" id="taller.work_tree">
       <field name="name">work tree</field>
-      <field name="model">taller.work</field>
+      <field name="model">sale.order</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
           <field name="workers"/>
-          <field name="reparation"/>
           <field name="type"/>
           <field name="garage_location"/>
           <field name="home_location"/>
           <field name="overrun"/>
-          <field name="booking"/>
+          <!-- <field name="booking"/> -->
           <field name="status"/>
           <field name="total_time"/>
           <field name="start_time"/>
-          <field name="total"/>
+          <field name="state"/>
+          <!-- <field name="total"/> -->
         </tree>
       </field>
     </record>
 
     <record model="ir.ui.view" id="taller.work_form">
       <field name="name">work form</field>
-      <field name="model">taller.work</field>
+      <field name="model">sale.order</field>
       <field name="arch" type="xml">
         <form><sheet><group>
           <field name="name"/>
           <field name="workers"/>
-          <field name="reparation"/>
           <field name="type"/>
           <field name="garage_location" attrs="{'invisible': [('type', '=', 'home')]}"/>
           <field name="home_location" attrs="{'invisible': [('type', '=', 'garage')]}"/>
           <field name="overrun" attrs="{'invisible': [('type', '=', 'garage')]}"/>
-          <field name="booking"/>
+          <!-- <field name="booking"/> -->
           <field name="status"/>
           <field name="total_time"/>
           <field name="start_time"/>
-          <field name="total"/>
+          <field name="state"/>
+          <!-- <field name="total"/> -->
+          <field name="amount_total"/>
         </group></sheet></form>
       </field>
     </record>
 
+<!-- Vista search -->
+
     <record model="ir.ui.view" id="taller.work_search">
       <field name="name">work search</field>
-      <field name="model">taller.work</field>
+      <field name="model">sale.order</field>
       <field name="arch" type="xml">
         <search>
           <filter name="group_by_garage" string="Group by garage" context="{'group_by': 'garage_location'}"/>
@@ -61,6 +64,19 @@
           <filter name="Home" string="Home location" domain="[('type', '=', 'home')]"/>
         </search>
       </field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="taller.work_action_tree">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="taller.work_tree"/>
+        <field name="act_window_id" ref="taller.work_action_window"/>
+    </record>
+    <record model="ir.actions.act_window.view" id="taller.work_action_view">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="taller.work_form"/>
+        <field name="act_window_id" ref="taller.work_action_window"/>
     </record>
 
   </data>
