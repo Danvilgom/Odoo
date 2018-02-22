@@ -11,7 +11,7 @@
           <field name="taller_aux"/>
           <field name="customer"/>
           <field name="date"/>
-          <field name="reparation"/>
+          <field name="work"/>
           <field name="status"/>
         </tree>
       </field>
@@ -22,7 +22,6 @@
       <field name="model">taller.booking</field>
       <field name="arch" type="xml">
         <form>
-
           <header>
             <button name="change_status" type="object" string="Change status"/>
             <field name="status" widget="statusbar"/>
@@ -33,7 +32,7 @@
           <field name="taller_aux"/>
           <field name="customer"/>
           <field name="date"/>
-          <field name="reparation"/>
+          <field name="work"/>
         </group></sheet></form>
       </field>
     </record>

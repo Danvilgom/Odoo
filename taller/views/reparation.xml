@@ -10,7 +10,7 @@
         <tree>
           <field name="name"/>
           <field name="section"/>
-          <field name="price"/>
+          <field name="list_price"/>
           <field name="isReparation" invisible="1"/>
         </tree>
       </field>
@@ -28,8 +28,8 @@
               <group>
                 <field name="name"/>
                 <field name="section"/>
-                <field name="price"/>
-                <field name="isReparation" invisible="1"/>
+                <field name="list_price"/>
+                <field name="isReparation"/>
               </group>
             </page>
           </notebook>

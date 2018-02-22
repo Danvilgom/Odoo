@@ -6,7 +6,7 @@
 #Igual que tambien tenemos que poner la empresa a ejecutar
 echo "Modelos:"
 echo ""
-ls ../modules
+ls modules
 echo ""
 echo "Introduzca el nombre del modulo:"
 read modul

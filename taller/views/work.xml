@@ -14,6 +14,7 @@
           <field name="garage_location"/>
           <field name="home_location"/>
           <field name="overrun"/>
+          <field name="booking"/>
           <field name="status"/>
           <field name="total_time"/>
           <field name="start_time"/>
@@ -34,6 +35,7 @@
           <field name="garage_location" attrs="{'invisible': [('type', '=', 'home')]}"/>
           <field name="home_location" attrs="{'invisible': [('type', '=', 'garage')]}"/>
           <field name="overrun" attrs="{'invisible': [('type', '=', 'garage')]}"/>
+          <field name="booking"/>
           <field name="status"/>
           <field name="total_time"/>
           <field name="start_time"/>

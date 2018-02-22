@@ -32,51 +32,36 @@ class reparation(models.Model):
     _name = 'product.template'
     _inherit = 'product.template'
 
-    name = fields.Char()
     section = fields.Many2one('taller.section')
-    price = fields.Float()
     isReparation = fields.Boolean()
 
 class work(models.Model):
-    _name = 'taller.work'
-    _inherit = 'product.template'
+    _name = 'sale.order'
+    _inherit = 'sale.order'
 
-    name = fields.Char()
+    taller_aux = fields.Many2one('taller.taller');
     workers = fields.Many2many('res.partner')
-    reparation = fields.Many2one('product.template')
+    customer = fields.Many2one('res.partner')
     type = fields.Selection([('garage','Garage'),('home','Home')])
     garage_location = fields.Many2one('taller.taller')
     home_location = fields.Char()
     overrun = fields.Float()
+    booking = fields.Many2one('taller.booking')
     status = fields.Selection([
         ('booking','Booking'),
         ('processing','Processing'),
         ('finalized','Finalized')
     ], default='booking')
+    date = fields.Datetime()
     total_time = fields.Float()
     start_time = fields.Datetime()
     total = fields.Float(compute='_compute_total')
 
-    # Campo compute por terminar
     @api.depends('reparation')
     def _compute_total(self):
         for r in self:
             preu = r.reparation.price
             r.total = (preu + (preu * r.total_time / 10)) + r.overrun
-
-class booking(models.Model):
-    _name = 'taller.booking'
-
-    name = fields.Char()
-    customer = fields.Many2one('res.partner')
-    date = fields.Datetime()
-    reparation = fields.Many2many('product.template')
-    taller_aux = fields.Many2one('taller.taller');
-    status = fields.Selection([
-        ('booking','Booking'),
-        ('processing','Processing'),
-        ('finalized','Finalized')
-    ], default='booking')
 
     @api.multi
     def change_status(self):
