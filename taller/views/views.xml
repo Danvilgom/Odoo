@@ -25,6 +25,7 @@
       <field name="res_model">sale.order</field>
       <field name="view_mode">tree,form</field>
       <field name="context">{'search_default_NotFinalized':1,'graph_mode':'line'}</field>
+      <field name="search_view_id" ref="taller.work_search"/>
     </record>
     <!-- <record model="ir.actions.act_window" id="taller.booking_action_window">
       <field name="name">Booking</field>

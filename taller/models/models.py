@@ -41,7 +41,7 @@ class work(models.Model):
 
     taller_aux = fields.Many2one('taller.taller');
     workers = fields.Many2many('res.partner')
-    customer = fields.Many2one('res.partner')
+    # customer = fields.Many2one('res.partner')
     type = fields.Selection([('garage','Garage'),('home','Home')])
     garage_location = fields.Many2one('taller.taller')
     home_location = fields.Char()

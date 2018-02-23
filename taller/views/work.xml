@@ -6,9 +6,11 @@
       <field name="name">work tree</field>
       <field name="model">sale.order</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree colors="blue:status=='booking';green:status=='processing';red:status'finalized'">
           <field name="name"/>
+          <field name="partner_id"/>
           <field name="workers"/>
+          <field name="order_line"/>
           <field name="type"/>
           <field name="garage_location"/>
           <field name="home_location"/>
@@ -27,18 +29,54 @@
       <field name="name">work form</field>
       <field name="model">sale.order</field>
       <field name="arch" type="xml">
-        <form><sheet><group>
+        <!-- <form><sheet><group> -->
+        <form>
+          <header>
+            <button name="change_status" type="object" string="Change status"/>
+            <field name="status" widget="statusbar"/>
+          </header>
+          <sheet>
+          <group>
           <field name="name"/>
+          <!-- <field name="customer"/> -->
+          <field name="partner_id"/>
           <field name="workers"/>
+          <field name="order_line">
+            <tree string="Sales Order Lines" editable="bottom" decoration-info="invoice_status=='to invoice'">
+              <field name="sequence" widget="handle"/>
+              <field name="product_id" attrs="{'readonly': ['|', ('qty_invoiced', '&gt;', 0), ('procurement_ids', '!=', [])]}" context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"/>
+              <field name="layout_category_id" groups="sale.group_sale_layout"/>
+              <field name="name"/>
+              <field name="product_uom_qty" string="Ordered Qty" context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"/>
+              <field name="qty_delivered" invisible="context.get('hide_sale')" attrs="{'readonly': [('qty_delivered_updateable', '=', False)]}"/>
+              <field name="qty_invoiced" invisible="context.get('hide_sale')"/>
+              <field name="qty_to_invoice" invisible="1"/>
+              <field name="product_uom" attrs="{'readonly': [('state', 'in', ('sale','done', 'cancel'))]}" context="{'company_id': parent.company_id}" groups="product.group_uom" options="{&quot;no_open&quot;: True}"/>
+              <field name="analytic_tag_ids" groups="analytic.group_analytic_accounting" widget="many2many_tags"/>
+              <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+              <field name="tax_id" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+              <field name="discount" groups="sale.group_discount_per_so_line"/>
+              <field name="price_subtotal" widget="monetary" groups="sale.group_show_price_subtotal"/>
+              <field name="price_total" widget="monetary" groups="sale.group_show_price_total"/>
+              <field name="qty_delivered_updateable" invisible="1"/>
+              <field name="procurement_ids" invisible="1"/>
+              <field name="state" invisible="1"/>
+              <field name="invoice_status" invisible="1"/>
+              <field name="customer_lead" invisible="1"/>
+              <field name="currency_id" invisible="1"/>
+            </tree>
+          </field>
+          <field name="pricelist_id" invisible="1"/>
+          <field name="company_id" invisible="1"/>
           <field name="type"/>
           <field name="garage_location" attrs="{'invisible': [('type', '=', 'home')]}"/>
           <field name="home_location" attrs="{'invisible': [('type', '=', 'garage')]}"/>
           <field name="overrun" attrs="{'invisible': [('type', '=', 'garage')]}"/>
           <!-- <field name="booking"/> -->
-          <field name="status"/>
+          <!-- <field name="status"/> -->
           <field name="total_time"/>
           <field name="start_time"/>
-          <field name="state"/>
+          <field name="state" invisible="1"/>
           <!-- <field name="total"/> -->
           <field name="amount_total"/>
         </group></sheet></form>
@@ -66,6 +104,20 @@
       </field>
     </record>
 
+<!-- Vista calendar -->
+
+    <record model="ir.ui.view" id="taller.work_calendar">
+      <field name="name">work calendar</field>
+      <field name="model">sale.order</field>
+      <field name="arch" type="xml">
+        <calendar string="works" date_start="start_time"  color="taller_aux">
+          <field name="name"/>
+          <field name="partner_id"/>
+        </calendar>
+      </field>
+    </record>
+
+
     <record model="ir.actions.act_window.view" id="taller.work_action_tree">
         <field eval="1" name="sequence"/>
         <field name="view_mode">tree</field>
@@ -76,6 +128,12 @@
         <field eval="2" name="sequence"/>
         <field name="view_mode">form</field>
         <field name="view_id" ref="taller.work_form"/>
+        <field name="act_window_id" ref="taller.work_action_window"/>
+    </record>
+    <record model="ir.actions.act_window.view" id="taller.work_action_calendar">
+        <field eval="3" name="sequence"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="taller.work_calendar"/>
         <field name="act_window_id" ref="taller.work_action_window"/>
     </record>
 
